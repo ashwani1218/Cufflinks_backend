@@ -18,10 +18,10 @@ public class ResponseConstants {
 
 	
 	//Response Description
-	public static final String EMPTY_LOGIN_REQUEST = "Empty User Request";
-	public static final String EMPTY_REGISTRATION_REQUEST = "Empty User Request";
+	public static final String EMPTY_LOGIN_REQUEST = "Empty Login Request";
+	public static final String EMPTY_REGISTRATION_REQUEST = "Empty Team Request";
 	public static final String UNAUTHENTIC_USER = "Wrong Credentials";
-	public static final String ALREADY_USER = "User Already Exists";
+	public static final String ALREADY_TEAM = "Team Already Exists";
 	public static final String SOMETHING_WENT_WRONG = "Something went wrong";
 	public static final String INVALID_USER = "Invalid Username";
 	public static final String EMPTY_SEARCH_REQUEST = "EMPTY SEARCH REQUEST";

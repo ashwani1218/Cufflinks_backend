@@ -16,6 +16,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author Ashwani Pandey
@@ -33,8 +35,13 @@ public class Team {
 	private Long id;
 
 	@Column(name = "team_name", unique = true, nullable = false)
-	private String teamName;
+	private String teamname;
 
+	
+	@JsonIgnore
+	@Column(name="team_password", nullable=false)
+	private String password;
+	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "team_members", joinColumns = @JoinColumn(name = "team_id"), inverseJoinColumns = @JoinColumn(name = "member_id"))
 	private List<Member> members;
@@ -47,12 +54,12 @@ public class Team {
 		this.id = id;
 	}
 
-	public String getTeamName() {
-		return teamName;
+	public String getTeamname() {
+		return teamname;
 	}
 
-	public void setTeamName(String teamName) {
-		this.teamName = teamName;
+	public void setTeamname(String teamName) {
+		this.teamname = teamName;
 	}
 
 	public List<Member> getMembers() {
@@ -63,16 +70,12 @@ public class Team {
 		this.members = members;
 	}
 
-	public Team(Long id, String teamName, List<Member> members) {
-		super();
-		this.id = id;
-		this.teamName = teamName;
-		this.members = members;
+	public String getPassword() {
+		return password;
 	}
 
-	public Team() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
@@ -81,7 +84,8 @@ public class Team {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((members == null) ? 0 : members.hashCode());
-		result = prime * result + ((teamName == null) ? 0 : teamName.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((teamname == null) ? 0 : teamname.hashCode());
 		return result;
 	}
 
@@ -104,25 +108,30 @@ public class Team {
 				return false;
 		} else if (!members.equals(other.members))
 			return false;
-		if (teamName == null) {
-			if (other.teamName != null)
+		if (password == null) {
+			if (other.password != null)
 				return false;
-		} else if (!teamName.equals(other.teamName))
+		} else if (!password.equals(other.password))
+			return false;
+		if (teamname == null) {
+			if (other.teamname != null)
+				return false;
+		} else if (!teamname.equals(other.teamname))
 			return false;
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Team [id=");
-		builder.append(id);
-		builder.append(", teamName=");
-		builder.append(teamName);
-		builder.append(", members=");
-		builder.append(members);
-		builder.append("]");
-		return builder.toString();
+	public Team(String teamName, String password, List<Member> members) {
+		super();
+		this.teamname = teamName;
+		this.password = password;
+		this.members = members;
 	}
 
+	public Team() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	
 }

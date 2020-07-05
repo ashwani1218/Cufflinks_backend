@@ -33,6 +33,9 @@ public class Member {
 	@Column(name = "member_name")
 	private String name;
 	
+	@Column(name = "member_skill")
+	private String skill;
+	
 	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "members")
 	private List<Team> teams;
 
@@ -44,6 +47,23 @@ public class Member {
 		this.id = id;
 	}
 
+	
+	public String getSkill() {
+		return skill;
+	}
+
+	public void setSkill(String skill) {
+		this.skill = skill;
+	}
+
+	public List<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -52,23 +72,14 @@ public class Member {
 		this.name = name;
 	}
 
-	public Member(Long id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
-	}
-
-	public Member() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((skill == null) ? 0 : skill.hashCode());
+		result = prime * result + ((teams == null) ? 0 : teams.hashCode());
 		return result;
 	}
 
@@ -91,22 +102,39 @@ public class Member {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (skill == null) {
+			if (other.skill != null)
+				return false;
+		} else if (!skill.equals(other.skill))
+			return false;
+		if (teams == null) {
+			if (other.teams != null)
+				return false;
+		} else if (!teams.equals(other.teams))
+			return false;
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Member [id=");
-		builder.append(id);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append("]");
-		return builder.toString();
+	public Member(Long id, String name, String skill, List<Team> teams) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.skill = skill;
+		this.teams = teams;
 	}
-	
-	
-	
-	
+
+	public Member() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Member(String name, String skill, List<Team> teams) {
+		super();
+		this.name = name;
+		this.skill = skill;
+		this.teams = teams;
+	}
+
+		
 	
 }
